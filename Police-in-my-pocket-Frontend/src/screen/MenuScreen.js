@@ -1,16 +1,23 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, Text} from 'react-native';
+import {StyleSheet, Text, View, Image} from 'react-native';
 import Geolocation from 'react-native-geolocation-service'
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';	
 import styled from 'styled-components';
 import {useNavigation} from '@react-navigation/native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
-const ViewContainer = styled.View`
+const ViewContainerMap = styled.View`
   flex: 1;
   justifyContent: center;
   aliginItems: center;
   backgroundColor: #709eff;
+`
+
+const ViewContainerButton = styled.View`
+  flex: 1;
+  justifyContent: center;
+  aliginItems: center;
+  backgroundColor: black;
 `
 
 const styles = StyleSheet.create({
@@ -19,6 +26,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFFF",
     padding: 10,
     margin: 8,
+    flexDirection: 'row'
   }
 
 })
@@ -45,31 +53,56 @@ const MapExample = ({ navigation }) => {
 
     return (
       <>
-      <ViewContainer>
-        <Text>현재 위치 안내</Text>
+      <ViewContainerMap>
           <MapView 
             style={{ 
               width: '80%', 
-              height: '40%',
+              height: '80%',
               position: 'absolute',
               marginLeft: 43,
              }} 
             provider={PROVIDER_GOOGLE}
             initialRegion={{ latitude: 37.78825, longitude: -122.4324, latitudeDelta: 0.0922, longitudeDelta: 0.0421, }} 
           />
+        </ViewContainerMap>
+        <ViewContainerButton>
           <TouchableOpacity style={styles.button}>
+          <Image source={require('../../assets/imgs/police-car.png')}
+        style={{
+          width:30,
+          height: 30,
+          marginLeft: 10,
+        }}></Image><Text>&nbsp;&nbsp;&nbsp;</Text>
             <Text>긴급상황 발생! 인근 파출소 혹은 가족에게 신고하기</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button}>
+          <Image source={require('../../assets/imgs/police-car.png')}
+        style={{
+          width:30,
+          height: 30,
+          marginLeft: 10,
+        }}></Image><Text>&nbsp;&nbsp;&nbsp;</Text>
             <Text>안심 귀가 서비스 이용하기</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button}>
+          <Image source={require('../../assets/imgs/police-car.png')}
+        style={{
+          width:30,
+          height: 30,
+          marginLeft: 10,
+        }}></Image><Text>&nbsp;&nbsp;&nbsp;</Text>
             <Text>주요 연락처 등록하기</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button}>
+          <Image source={require('../../assets/imgs/police-car.png')}
+        style={{
+          width:30,
+          height: 30,
+          marginLeft: 10,
+        }}></Image><Text>&nbsp;&nbsp;&nbsp;</Text>
             <Text>실시간 위험 지역 / 치안 시설 정보 확인하기</Text>
           </TouchableOpacity>
-        </ViewContainer>
+          </ViewContainerButton>
       </>
     );
 };
