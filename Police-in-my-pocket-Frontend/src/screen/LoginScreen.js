@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: 'GmarketSansTTFMedium',
     fontStyle: 'normal',
-    alignItems: 'center',,
+    alignItems: 'center',
   },
 
   container: {
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: 'GmarketSansTTFMedium',
     color: '#FFFFFF',
-  },,
+  },
 });
 
 export default LoginApp;
