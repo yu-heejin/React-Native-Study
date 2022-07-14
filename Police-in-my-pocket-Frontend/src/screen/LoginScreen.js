@@ -86,8 +86,8 @@ const LoginApp = ({navigation}) => {
         </Text>
       </View>
     </ImageBackground>
-  );;
-};;
+  );
+};
 
 const styles = StyleSheet.create({
   input: {
