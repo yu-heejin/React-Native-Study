@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View, Image} from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
-import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
+import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import styled from 'styled-components';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
@@ -174,7 +174,30 @@ const MapExample = ({navigation}) => {
                 latitudeDelta: 0.005,
                 longitudeDelta: 0.005,
               }}    
-            />
+            >
+              <Marker
+                coordinate={{latitude: 37.78825, longitude: -122.4324}}
+                title="current location"
+                description="this is a current location marker"
+              >
+                <Image source={require('../../assets/imgs/placeholder.png')} style={{ width: 40, height: 40 }}></Image>
+              </Marker>
+              <Marker
+                coordinate={{latitude: 37.79000, longitude: -122.4324}}
+                title="danger location"
+                description="this is a danger location marker"
+              >
+                <Image source={require('../../assets/imgs/placeholder_danger.png')} style={{ width: 40, height: 40 }}></Image>
+              </Marker>
+              <Marker
+                coordinate={{latitude: 37.78888, longitude: -122.4350}}
+                title="safe location"
+                description="this is a safe location marker"
+              >
+                <Image source={require('../../assets/imgs/placeholder_safe.png')} style={{ width: 40, height: 40 }}></Image>
+              </Marker>
+            </MapView>
+            
           </View>
       </ViewContainerMap>
       <ViewContainerButton>
