@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, Text, View, Image, ScrollView} from 'react-native';
+import {StyleSheet, Text, View, Image} from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 import styled from 'styled-components';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import CustomText from '../style/GlobalFontStyle';
 
 const ViewContainerMap = styled.View`
   flex: 1.1;
@@ -65,12 +64,10 @@ async function requestPermission() {
 
 const MapExample = ({navigation}) => {
   const [location, setLocation] = useState();
-
   useEffect(() => {
     requestPermission().then(result => {
-      console.log({result});
-
-      if(result === "granted") {
+      console.log({ result });
+      if (result === "granted") {
         Geolocation.getCurrentPosition(
           pos => {
             setLocation(pos.coords);
@@ -88,18 +85,41 @@ const MapExample = ({navigation}) => {
     });
   }, []);
 
+
+
   return (
     <>
-      <View style={{flexDirection: 'row', backgroundColor: '#709eff', justifyContent: 'space-around'}}>
-        <CustomText>실시간 음성인식</CustomText>
-        <CustomText>OOO님, 환영합니다.</CustomText>
+      <View style={{flexDirection: 'row', backgroundColor: '#709eff',}}>
+        <View>
+          <Text style={{
+              fontFamily:'GmarketSansTTFMedium',
+              color: 'white',
+              marginTop: 10,
+              fontSize: 13,
+              marginLeft: 240
+            }}>OOO님, 환영합니다.</Text>
+          <View style={{flexDirection: 'row'}}>
+            <Text style={{
+                fontFamily:'GmarketSansTTFMedium',
+                color: 'white',
+                marginTop: 5,
+                fontSize: 10,
+                marginLeft: 241
+            }}>로그아웃 </Text>
+            <Text style={{
+                fontFamily:'GmarketSansTTFMedium',
+                color: 'white',
+                marginTop: 5,
+                fontSize: 10,
+            }}>마이페이지</Text>
+          </View>
+        </View>
         <Image source={require('../../assets/imgs/user2.png')}
           style={{
             width: 30,
             height: 30,
-            marginLeft: '5%',
             marginTop: 10
-        }}></Image>
+          }}></Image>
       </View>
       <ViewContainerMap>
         <View style={{flexDirection: 'row', marginBottom: '1%', alignItems: 'flex-end', }}>
@@ -147,11 +167,13 @@ const MapExample = ({navigation}) => {
               }}
               provider={PROVIDER_GOOGLE}
               initialRegion={{
-              latitude: 37.78825,
-              longitude: -122.4324,
-              latitudeDelta: 0.0922,
-              longitudeDelta: 0.0421,
-              }}
+                latitude: 37.78825,
+                longitude: -122.4324,
+                //latitude: location.latitude,
+                //longitude: location.longitude,
+                latitudeDelta: 0.005,
+                longitudeDelta: 0.005,
+              }}    
             />
           </View>
       </ViewContainerMap>
@@ -185,7 +207,7 @@ const MapExample = ({navigation}) => {
               height: 30,
               marginLeft: 5,
             }}></Image>
-          <ButtonCustomFont>주요 연락처 등록하기</ButtonCustomFont>
+          <ButtonCustomFont>주요 연락처 및 목적지 등록하기</ButtonCustomFont>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button}>
           <Image
