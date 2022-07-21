@@ -141,6 +141,8 @@ const MapExample = ({navigation}) => {
                 width: '100%',
                 height: '87%',
               }}
+              showsMyLocationButton={true}
+              showsUserLocation={true}
               provider={PROVIDER_GOOGLE}
               initialRegion={{
                 latitude: 37.78825,
