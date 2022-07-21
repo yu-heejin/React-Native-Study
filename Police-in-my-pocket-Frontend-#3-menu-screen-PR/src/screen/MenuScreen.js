@@ -23,9 +23,8 @@ const ViewContainerButton = styled.View`
 const MarkerCustomFont = styled.Text`
   color: white;
   fontFamily: GmarketSansTTFMedium;
-  fontSize: 10px;
+  fontSize: 10;
 `
-//fontSize에 px안 붙이면 경고창 뜸
 
 const ButtonCustomFont = styled.Text`
   fontFamily: GmarketSansTTFMedium;
@@ -233,8 +232,7 @@ const MapExample = ({navigation}) => {
             }}></Image>
           <ButtonCustomFont>주요 연락처 및 목적지 등록하기</ButtonCustomFont>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button}
-         onPress={() => navigation.navigate('Location')}>
+        <TouchableOpacity style={styles.button}>
           <Image
             source={require('../../assets/imgs/sign.png')}
             style={{

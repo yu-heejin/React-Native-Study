@@ -3,16 +3,17 @@ import {StyleSheet, Text, View, Image} from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import styled from 'styled-components';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
+import { GlobalStyleComponent } from 'styled-components';
 
 const ViewContainerMap = styled.View`
-  flex: 1.1;
+  flex: 1;
   justifyContent: center;
   backgroundColor: #709eff;
   fontFamily: GmarketSansTTFMedium;
 `;
 
-const ViewContainerButton = styled.View`
+const ViewContainerList = styled.View`
   flex: 1;
   justifyContent: center;
   alignItem: center;
@@ -25,25 +26,20 @@ const MarkerCustomFont = styled.Text`
   fontFamily: GmarketSansTTFMedium;
   fontSize: 10px;
 `
-//fontSize에 px안 붙이면 경고창 뜸
 
-const ButtonCustomFont = styled.Text`
+const ListCustomFont = styled.Text`
   fontFamily: GmarketSansTTFMedium;
-  marginLeft: 3%;
+  marginTop: 10%;
+  fontSize: 18px;
+  color: black;
 `
 
-const styles = StyleSheet.create({
-  button: {
-    alignItems: 'center',
-    backgroundColor: '#FFFFFF',
-    padding: 9,
-    margin: 8,
-    flexDirection: 'row',
-    borderRadius: 10,
-    width: '95%',
-    marginLeft: '2.7%',
-  },
-});
+const CountCustomFont = styled.Text`
+  fontFamily: GmarketSansTTFMedium;
+  marginTop: 5%;
+  fontSize: 13px;
+  color: black;
+`
 
 async function requestPermission() {
   try {
@@ -129,28 +125,7 @@ const MapExample = ({navigation}) => {
             marginLeft: '5%',
             fontSize: 17,
             fontFamily: 'GmarketSansTTFMedium',
-          }}>현재 위치 안내</Text>
-          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-          <Image source={require('../../assets/imgs/placeholder.png')}
-            style={{
-              width: 12,
-              height: 12,
-              marginLeft: '5%',
-          }}></Image>
-          <MarkerCustomFont>현재 위치</MarkerCustomFont>
-          <Image source={require('../../assets/imgs/placeholder_danger.png')}
-              style={{
-                width: 12,
-                height: 12,
-          }}></Image>
-          <MarkerCustomFont>위험 지역</MarkerCustomFont>
-          <Image source={require('../../assets/imgs/placeholder_safe.png')}
-              style={{
-                width: 12,
-                height: 12,
-              }}></Image>
-          <MarkerCustomFont>치안 시설</MarkerCustomFont>
-          </View>
+          }}>실시간 위험 지역 / 치안 시설 정보</Text>
           </View>
           <View style={{
             padding: 0,
@@ -198,53 +173,86 @@ const MapExample = ({navigation}) => {
                 <Image source={require('../../assets/imgs/placeholder_safe.png')} style={{ width: 40, height: 40 }}></Image>
               </Marker>
             </MapView>
-            
           </View>
       </ViewContainerMap>
-      <ViewContainerButton>
-        <TouchableOpacity style={styles.button}>
-          <Image
-            source={require('../../assets/imgs/siren.png')}
+      <View style={{flexDirection: 'row', backgroundColor: '#709eff',}}>
+          <Image source={require('../../assets/imgs/placeholder.png')}
             style={{
-              width: 30,
-              height: 30,
-              marginLeft: 5,
-            }}></Image>
-          <ButtonCustomFont>긴급상황 발생! 인근 파출소 혹은 가족에게 신고하기</ButtonCustomFont>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button}
-        onPress={() => navigation.navigate('Main')}>
-          <Image
-            source={require('../../assets/imgs/police-car.png')}
-            style={{
-              width: 30,
-              height: 30,
-              marginLeft: 5,
-            }}></Image>
-          <ButtonCustomFont>안심 귀가 서비스 이용하기</ButtonCustomFont>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
-          <Image
-            source={require('../../assets/imgs/open-book.png')}
-            style={{
-              width: 30,
-              height: 30,
-              marginLeft: 5,
-            }}></Image>
-          <ButtonCustomFont>주요 연락처 및 목적지 등록하기</ButtonCustomFont>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button}
-         onPress={() => navigation.navigate('Location')}>
-          <Image
-            source={require('../../assets/imgs/sign.png')}
-            style={{
-              width: 30,
-              height: 30,
-              marginLeft: 5,
-            }}></Image>
-          <ButtonCustomFont>실시간 위험 지역 / 치안 시설 정보 확인하기</ButtonCustomFont>
-        </TouchableOpacity>
-      </ViewContainerButton>
+              width: 12,
+              height: 12,
+              marginLeft: '5%',
+          }}></Image>
+          <MarkerCustomFont>현재 위치</MarkerCustomFont>
+          <Image source={require('../../assets/imgs/placeholder_danger.png')}
+              style={{
+                width: 12,
+                height: 12,
+          }}></Image>
+          <MarkerCustomFont>위험 지역</MarkerCustomFont>
+          <Image source={require('../../assets/imgs/placeholder_safe.png')}
+              style={{
+                width: 12,
+                height: 12,
+              }}></Image>
+          <MarkerCustomFont>치안 시설</MarkerCustomFont>
+          </View>
+        <ViewContainerList>
+            <ScrollView style={{
+            padding: 0,
+            borderRadius: 10,
+            backgroundColor: 'white',
+            width: '95%',
+            height: '10%',
+            marginLeft: '2.7%',
+            marginTop: '2%',
+            marginBottom: '4%',
+          }}>
+            <TouchableOpacity onPress={() => console.log('safe location click')} style={{flexDirection: 'row',}}>
+                <Image source={require('../../assets/imgs/placeholder_safe.png')}
+                    style={{
+                        width: 50,
+                        height: 50,
+                        margin: '3%'
+                    }}></Image>
+                <View><ListCustomFont>safe location</ListCustomFont>
+                    <CountCustomFont>치안 시설</CountCustomFont>
+                </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => console.log('danger location click')} style={{flexDirection: 'row',}}>
+                <Image source={require('../../assets/imgs/placeholder_danger.png')}
+                    style={{
+                        width: 50,
+                        height: 50,
+                        margin: '3%'
+                    }}></Image>
+                <View><ListCustomFont>대학원</ListCustomFont>
+                    <CountCustomFont>위험 발생 건수 : n회</CountCustomFont>
+                </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => console.log('safe location click')} style={{flexDirection: 'row',}}>
+                <Image source={require('../../assets/imgs/placeholder_safe.png')}
+                    style={{
+                        width: 50,
+                        height: 50,
+                        margin: '3%'
+                    }}></Image>
+                <View><ListCustomFont>송송식탁</ListCustomFont>
+                    <CountCustomFont>치안 시설</CountCustomFont>
+                </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => console.log('danger location click')} style={{flexDirection: 'row',}}>
+                <Image source={require('../../assets/imgs/placeholder_danger.png')}
+                    style={{
+                        width: 50,
+                        height: 50,
+                        margin: '3%'
+                    }}></Image>
+                <View><ListCustomFont>교수님의 연구동</ListCustomFont>
+                    <CountCustomFont>위험 발생 건수 : n회</CountCustomFont>
+                </View>
+            </TouchableOpacity>
+            </ScrollView>
+        </ViewContainerList>
       </>
   );
 };
